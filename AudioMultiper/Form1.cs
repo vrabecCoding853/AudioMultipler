@@ -21,15 +21,15 @@ namespace AudioMultiper
         private void button1_Click(object sender, EventArgs e)
         {
             var fileStream = File.Create("D:\\test\\test.mp3");
-            string[] inputFiles = { "D:\\test\\a.mp3", "D:\\test\\b.mp3" };
-            Combine(inputFiles,fileStream);
+            string inputFile = "D:\\test\\a.mp3";
+            Combine(inputFile,fileStream);
             fileStream.Close();
         }
-        public static void Combine(string[] inputFiles, Stream output)
+        public static void Combine(string inputFile, Stream output)
         {
-            foreach (string file in inputFiles)
+            for (int i = 0; i < 148; i++)
             {
-                Mp3FileReader reader = new Mp3FileReader(file);
+                Mp3FileReader reader = new Mp3FileReader(inputFile);
                 if ((output.Position == 0) && (reader.Id3v2Tag != null))
                 {
                     output.Write(reader.Id3v2Tag.RawData,
